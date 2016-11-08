@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { User } from './user.interface';
+
 @Component({
   selector: 'register-form',
   templateUrl: './register-form.component.html',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterFormComponent implements OnInit {
 
-  constructor() { }
+  public user: User;
 
   ngOnInit() {
+    this.user = {
+      username: '',
+      email: '',
+      confirmEmail: '',
+      password: '',
+      confirmPassword: ''
+    }
+  }
+
+  save(model: User, isValid: boolean) {
+    console.log(model,isValid);
   }
 
 }
