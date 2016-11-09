@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 import { AppRoutingModule, routingComponents } from './app.routing';
 import { EqualValidatorDirective } from './register-form/equal-validator.directive';
+import { UserService } from './shared/user.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { EqualValidatorDirective } from './register-form/equal-validator.directi
     HttpModule,
     MaterializeModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

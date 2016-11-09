@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
+
+
+import { UserService } from '../shared/user.service';
 
 @Component({
   selector: 'login-form',
@@ -7,9 +11,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginFormComponent implements OnInit {
 
-  constructor() { }
+  constructor(private userService: UserService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.userService.getHealth().subscribe((status: Object)=>{
+      console.log(status);
+    });
   }
 
 }
