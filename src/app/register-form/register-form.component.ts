@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, CanActivate } from '@angular/router';
 
 import { User } from './user.interface';
+import { UserService } from '../shared/user.service';
+
+declare var Materialize: any;
 
 @Component({
   selector: 'register-form',
@@ -8,6 +12,8 @@ import { User } from './user.interface';
   styleUrls: ['./register-form.component.scss']
 })
 export class RegisterFormComponent implements OnInit {
+
+  constructor(private userService: UserService, private router: Router) { }
 
   public user: User;
 
@@ -22,7 +28,19 @@ export class RegisterFormComponent implements OnInit {
   }
 
   save(model: User, isValid: boolean) {
-    console.log(model,isValid);
+    if(isValid){
+      this.userService.register(model).subscribe(
+        userId => {
+          Materialize.toast(`Usuario criado com sucesso `, 4000, 'blue rounded')
+          this.router.navigate(['/']);
+        },
+        err => {
+          err.forEach((error)=>{
+            Materialize.toast(error.message,4000, 'red rounded');
+          })        
+        }
+      );
+    }
   }
 
 }
