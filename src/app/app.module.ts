@@ -9,13 +9,17 @@ import { NavigationBarComponent } from './navigation-bar/navigation-bar.componen
 import { AppRoutingModule, routingComponents } from './app.routing';
 import { EqualValidatorDirective } from './register-form/equal-validator.directive';
 import { UserService } from './shared/user.service';
+import { AlertComponent } from './alert/alert.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationBarComponent,
     routingComponents,
-    EqualValidatorDirective
+    EqualValidatorDirective,
+    AlertComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
