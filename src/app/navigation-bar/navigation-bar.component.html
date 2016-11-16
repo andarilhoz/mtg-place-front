@@ -4,8 +4,9 @@
 <!--            <div class="badge right logged radius">
         </div> -->
         <ul class="right hide-on-med-and-down">
-          <li><a routerLink="/login">Login</a></li>
-          <li><a routerLink="/register">Register</a></li>
+          <li *ngIf="!logged"><a routerLink="/login">Login</a></li>
+          <li *ngIf="logged"><a routerLink="/login">Logout</a></li>
+          <li *ngIf="!logged"><a routerLink="/register">Register</a></li>
           <li><a href="#" class="badge"></a></li>
         </ul>
     </div>

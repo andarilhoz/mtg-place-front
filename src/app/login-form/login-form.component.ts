@@ -3,9 +3,10 @@ import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs/Rx';
 
-import { AlertService } from '../shared/alert.service'
 import { AuthenticationService } from '../shared/authentication.service'
 import { UserService } from '../shared/user.service';
+
+declare var Materialize: any;
 
 @Component({
   selector: 'login-form',
@@ -18,11 +19,17 @@ export class LoginFormComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService,
-    private alertService: AlertService) { }
+    private authenticationService: AuthenticationService) { }
 
   ngOnInit(): void {
-    this.authenticationService.logout();
+    this.authenticationService.logout().subscribe(
+      data => {
+        console.log('deslogado com sucesso')
+       },
+       error => {
+         console.log(error)
+       }
+    );
   }
 
   login(){
@@ -34,7 +41,8 @@ export class LoginFormComponent implements OnInit {
             this.router.navigate(['/home']);
           },
           error => {
-            this.alertService.error(error);
+            console.log(error);
+            Materialize.toast('User or password doesnt match',4000, 'red rounded');
             this.loading = false;
           });    
   }
