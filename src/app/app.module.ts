@@ -11,7 +11,6 @@ import { EqualValidatorDirective } from './register-form/equal-validator.directi
 import { UserService } from './shared/user.service';
 import { AlertService } from './shared/alert.service';
 import { AuthenticationService } from './shared/authentication.service';
-import { AlertComponent } from './alert/alert.component';
 import { HomeComponent } from './home/home.component';
 
 @NgModule({
@@ -20,7 +19,6 @@ import { HomeComponent } from './home/home.component';
     NavigationBarComponent,
     routingComponents,
     EqualValidatorDirective,
-    AlertComponent,
     HomeComponent
   ],
   imports: [
