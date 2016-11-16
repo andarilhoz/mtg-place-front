@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { Observable } from 'rxjs/Rx';
 
-
+import { AlertService } from '../shared/alert.service'
+import { AuthenticationService } from '../shared/authentication.service'
 import { UserService } from '../shared/user.service';
 
 @Component({
@@ -10,13 +13,30 @@ import { UserService } from '../shared/user.service';
   styleUrls: ['./login-form.component.scss']
 })
 export class LoginFormComponent implements OnInit {
+  model: any = {};
+  loading = false;
 
-  constructor(private userService: UserService) { }
+  constructor(
+    private router: Router,
+    private authenticationService: AuthenticationService,
+    private alertService: AlertService) { }
 
   ngOnInit(): void {
-    this.userService.getHealth().subscribe((status: Object)=>{
-      console.log(status);
-    });
+    this.authenticationService.logout();
+  }
+
+  login(){
+    this.loading = true;
+    this.authenticationService.login(this.model.username, this.model.password)
+        .subscribe(
+          data => {
+            console.log(data);
+            this.router.navigate(['/home']);
+          },
+          error => {
+            this.alertService.error(error);
+            this.loading = false;
+          });    
   }
 
 }

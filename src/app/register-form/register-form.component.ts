@@ -36,7 +36,7 @@ export class RegisterFormComponent implements OnInit {
         },
         err => {
           err.forEach((error)=>{
-            Materialize.toast(error.message,4000, 'red rounded');
+            Materialize.toast((error.length > 1 ? error : error.message),4000, 'red rounded');
           })        
         }
       );

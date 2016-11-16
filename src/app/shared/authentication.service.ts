@@ -11,15 +11,11 @@ export class AuthenticationService {
     constructor(private http: Http) { }
  
     login(username, password) {
-        return this.http.post( this.baseUrl + 'signin', JSON.stringify({ username: username, password: password }))
+        return this.http.post( this.baseUrl + 'login', { username: username, password: password })
             .map((response: Response) => {
-                // login successful if there's a jwt token in the response
-                let user = response.json();
-                if (user && user.token) {
-                    // store user details and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('currentUser', JSON.stringify(user));
-                }
-            });
+                //if logged will return 200 ok
+            })
+            .catch((error: any) => Observable.throw(error.json().errors || 'Server error'))
     }
  
     logout() {
