@@ -21,7 +21,9 @@ export class NavigationBarComponent implements OnInit {
   
   
   ngOnInit() {
-      this.getUserData();
+      if(this.router.url != '/login' && this.router.url != '/register'  ){
+        this.getUserData();
+      }
       this.authenticationService.emittLogin.subscribe(
         loggin => {
           this.logged = loggin;
@@ -33,24 +35,23 @@ export class NavigationBarComponent implements OnInit {
   }
 
   getUserData() {
-    if(this.router.url != '/login' && this.router.url != '/register'  ){
-      this.user = this.userService.getMe().subscribe(
-            data => {
-              this.logged = true;
-              this.user = data;
-              this.userService.getAvatar(data._id)
-                  .subscribe(
-                    data => {
-                      this.avatar = data;
-                    },
-                    error => {
-                      console.log(error);
-                    }
-                  )
-            },
-            error => {
-              this.logged = false;
-            });       
-    }
+    this.user = this.userService.getMe().subscribe(
+          data => {
+            this.logged = true;
+            this.user = data;
+            this.userService.getAvatar(data._id)
+                .subscribe(
+                  data => {
+                    this.avatar = data;
+                  },
+                  error => {
+                    console.log(error);
+                  }
+                )
+          },
+          error => {
+            this.logged = false;
+          });       
   }
+  
 }
