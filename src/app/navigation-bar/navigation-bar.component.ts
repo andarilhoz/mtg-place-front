@@ -21,19 +21,25 @@ export class NavigationBarComponent implements OnInit {
   
   
   ngOnInit() {
-    this.user = this.userService.getMe().subscribe(
-      data => {
-        this.logged = true;
-        this.user = data;
-      },
-      error => {
-        this.logged = false;
-      });
+      this.getUserData();
       this.authenticationService.emittLogin.subscribe(
         loggin => {
-          this.logged = loggin; 
+          this.logged = loggin;
+          if(loggin){
+            this.getUserData();
+          } 
         }
       );
   }
 
+  getUserData() {
+    this.user = this.userService.getMe().subscribe(
+          data => {
+            this.logged = true;
+            this.user = data;
+          },
+          error => {
+            this.logged = false;
+          });       
+  }
 }
