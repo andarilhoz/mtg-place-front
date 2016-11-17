@@ -4,12 +4,9 @@
 	background-image: url( $url-public-images + 'bg.jpg' ); //http://lorempixel.com/g/1440/900/cats/);
 	background-size: cover;
 	background-position: top left;
-	height: 100%;
+	height: calc( 100% - 53px );
 	width: 100%;
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: -1;
+	z-index: -2;
 	.login {
 		background-color: #FFF;
 		height: 450px;
@@ -34,10 +31,4 @@
 			}
 		}
 	}
-}
-
-.block {
-	box-shadow: 0 0 10px 0 rgba( 0,0,0,.25 );
-	margin: 0;
-	padding: $default-margin-space*3;
 }

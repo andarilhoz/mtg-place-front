@@ -23,6 +23,7 @@ export class RegisterFormComponent implements OnInit {
 
   ngOnInit() {
     this.user = {
+      _id: '',
       username: '',
       email: '',
       confirmEmail: '',

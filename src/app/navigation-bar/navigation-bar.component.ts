@@ -12,7 +12,7 @@ import { AuthenticationService } from '../shared/authentication.service';
 export class NavigationBarComponent implements OnInit {
   user: any = {};
   logged: boolean = false;
-
+  avatar: string = '';
 
   constructor(
     private router: Router,
@@ -33,13 +33,24 @@ export class NavigationBarComponent implements OnInit {
   }
 
   getUserData() {
-    this.user = this.userService.getMe().subscribe(
-          data => {
-            this.logged = true;
-            this.user = data;
-          },
-          error => {
-            this.logged = false;
-          });       
+    if(this.router.url != '/login' && this.router.url != '/register'  ){
+      this.user = this.userService.getMe().subscribe(
+            data => {
+              this.logged = true;
+              this.user = data;
+              this.userService.getAvatar(data._id)
+                  .subscribe(
+                    data => {
+                      this.avatar = data;
+                    },
+                    error => {
+                      console.log(error);
+                    }
+                  )
+            },
+            error => {
+              this.logged = false;
+            });       
+    }
   }
 }

@@ -17,6 +17,14 @@ export class UserService {
     private http: Http,
     private authenticationService: AuthenticationService) { };
 
+
+  getAvatar(userId): Observable<string> {
+    return this.http  
+               .get(this.baseUrl + `users/${userId}/image`)
+               .map((r: Response)=> r.toString())
+               .catch((error: any) => Observable.throw(error.json().errors || 'Server error'))
+  }
+
   getMe(): Observable<User> {
     return this.http
                .get(this.baseUrl + 'me')
@@ -24,14 +32,14 @@ export class UserService {
                .catch((error: any) => Observable.throw(error.json().errors || 'Server error'))
   }
 
-  getHealth(): Observable<String> {
+  getHealth(): Observable<string> {
     return this.http
                .get(this.baseUrl + 'health')
                .map((r: Response) => r.json())
                .catch((error: any) => Observable.throw(error.json().errors || 'Server error'))
   }
 
-  register(user: User): Observable<String> {
+  register(user: User): Observable<string> {
     return this.http
                .post(this.baseUrl + 'register', user)
                .map((r: Response) => r.json())
@@ -46,7 +54,7 @@ export class UserService {
     
   }
 
-  delete(id): Observable<String> {
+  delete(id): Observable<string> {
         return this.http
                .delete(this.baseUrl + 'users/'+ id)
                .map((r: Response) => r.json())
