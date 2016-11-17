@@ -7,7 +7,11 @@
           <li *ngIf="!logged"><a routerLink="/login">Login</a></li>
           <li *ngIf="logged"><a routerLink="/login">Logout</a></li>
           <li *ngIf="!logged"><a routerLink="/register">Register</a></li>
-          <li><a href="#" class="badge"></a></li>
+          <li *ngIf="logged">
+              <a href="#" onClick="return false;" class="badge">
+                  {{ user.username }}
+              </a>
+          </li>
         </ul>
     </div>
 </nav>

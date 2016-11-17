@@ -4,13 +4,18 @@ import { Observable } from 'rxjs/Rx';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import 'rxjs/BehaviorSubject'
 
 import { User } from '../register-form/user.interface';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable()
 export class UserService {
-  baseUrl: String = 'http://localhost/api/';
-  constructor(private http: Http) { }
+  baseUrl: String = window.location.origin + '/api/';
+  
+  constructor(
+    private http: Http,
+    private authenticationService: AuthenticationService) { };
 
   getMe(): Observable<User> {
     return this.http

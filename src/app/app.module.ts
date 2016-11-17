@@ -9,9 +9,9 @@ import { NavigationBarComponent } from './navigation-bar/navigation-bar.componen
 import { AppRoutingModule, routingComponents } from './app.routing';
 import { EqualValidatorDirective } from './register-form/equal-validator.directive';
 import { UserService } from './shared/user.service';
-import { AlertService } from './shared/alert.service';
 import { AuthenticationService } from './shared/authentication.service';
 import { HomeComponent } from './home/home.component';
+import { LoggedInGuard } from './guards/loggedin.guard'
 
 @NgModule({
   declarations: [
@@ -31,7 +31,7 @@ import { HomeComponent } from './home/home.component';
   providers: [
     UserService,
     AuthenticationService,
-    AlertService
+    LoggedInGuard
   ],
   bootstrap: [AppComponent]
 })

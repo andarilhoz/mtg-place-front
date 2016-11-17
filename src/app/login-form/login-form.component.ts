@@ -24,7 +24,7 @@ export class LoginFormComponent implements OnInit {
   ngOnInit(): void {
     this.authenticationService.logout().subscribe(
       data => {
-        console.log('deslogado com sucesso')
+        
        },
        error => {
          console.log(error)

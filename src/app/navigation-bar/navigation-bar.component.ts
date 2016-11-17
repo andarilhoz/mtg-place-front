@@ -24,6 +24,7 @@ export class NavigationBarComponent implements OnInit {
     this.user = this.userService.getMe().subscribe(
       data => {
         this.logged = true;
+        this.user = data;
       },
       error => {
         this.logged = false;

@@ -6,10 +6,12 @@ import 'rxjs/add/operator/map'
  
 @Injectable()
 export class AuthenticationService {
-    baseUrl: String = 'http://localhost/api/';
+    baseUrl: String = window.location.origin + '/api/';
+
     emittLogin = new EventEmitter<boolean>();
     constructor(private http: Http) { }
- 
+
+
     login(username, password) {
         return this.http.post( this.baseUrl + 'login', { username: username, password: password })
             .map((response: Response) => {
